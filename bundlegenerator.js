@@ -1,3 +1,8 @@
+/**
+ * @param {Number} orderSize
+ * @param {Array} bundleInfos
+ * @return {null | Array} null means cannot generate bundle breakdown
+ */
 export function generateBundleBreakdown(orderSize, bundleInfos) {
   if (orderSize === 0) {
     return []
