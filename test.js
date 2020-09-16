@@ -13,13 +13,35 @@ const testCases = [
   },
   {
     input: {
-      orderSize: 15,
+      orderSize: 10,
       bundleInfos: [
         { size: 5, price: 6.99 },
         { size: 10, price: 12.99 },
       ],
     },
-    expected: [5, 10],
+    expected: [10],
+  },
+  {
+    input: {
+      orderSize: 15,
+      bundleInfos: [
+        { size: 3, price: 9.95 },
+        { size: 6, price: 16.95 },
+        { size: 9, price: 24.95 },
+      ],
+    },
+    expected: [9, 6],
+  },
+  {
+    input: {
+      orderSize: 13,
+      bundleInfos: [
+        { size: 3, price: 5.95 },
+        { size: 5, price: 9.75 },
+        { size: 9, price: 16.99 },
+      ],
+    },
+    expected: [5, 5, 3],
   },
 ]
 
