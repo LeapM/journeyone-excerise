@@ -21,12 +21,14 @@ const testCases = [
     input: {
       orderSize: 1,
       bundleInfos: [{ size: 1, price: 6.99 }],
+      productCode: 'a',
     },
     expected: [1],
   },
   {
     input: {
       orderSize: 10,
+      productCode: 'b',
       bundleInfos: [
         { size: 5, price: 6.99 },
         { size: 10, price: 12.99 },
@@ -37,6 +39,7 @@ const testCases = [
   {
     input: {
       orderSize: 15,
+      productCode: 'c',
       bundleInfos: [
         { size: 3, price: 9.95 },
         { size: 6, price: 16.95 },
@@ -48,6 +51,7 @@ const testCases = [
   {
     input: {
       orderSize: 13,
+      productCode: 'd',
       bundleInfos: [
         { size: 3, price: 5.95 },
         { size: 5, price: 9.75 },
@@ -59,6 +63,7 @@ const testCases = [
   {
     input: {
       orderSize: 7,
+      productCode: 'e',
       bundleInfos: [
         { size: 3, price: 5.95 },
         { size: 5, price: 9.75 },
@@ -69,7 +74,7 @@ const testCases = [
 ]
 
 testCases.forEach(({ input, expected }, index) => {
-  const bundles = generateBundleBreakdown(input.orderSize, input.bundleInfos)
+  const bundles = generateBundleBreakdown(input.orderSize, input.bundleInfos, input.productCode)
   if (isBundleBreakdownEqual(bundles, expected)) {
     console.log(`testcase ${index} passed`)
   } else {

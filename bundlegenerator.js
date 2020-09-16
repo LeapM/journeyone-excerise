@@ -1,14 +1,24 @@
+let memo = {}
 /**
  * @param {Number} orderSize
  * @param {Array} bundleInfos
+ * @param {String} productCode
  * @return {null | Array} null means cannot generate bundle breakdown
  */
-export function generateBundleBreakdown(orderSize, bundleInfos) {
+export function generateBundleBreakdown(orderSize, bundleInfos, productCode) {
   if (orderSize === 0) {
     return []
   }
+  const key = productCode + '_' + orderSize
+
+  if (memo.hasOwnProperty(key)) {
+    return memo[key]
+  }
+
   bundleInfos.sort((a, b) => b.size - a.size)
+
   let result = null
+
   for (let bundleInfo of bundleInfos) {
     if (orderSize >= bundleInfo.size) {
       const bundlesWithNewOrderSize = generateBundleBreakdown(
@@ -24,5 +34,6 @@ export function generateBundleBreakdown(orderSize, bundleInfos) {
     }
   }
   //   console.log('result', result)
-  return result && result.sort((a, b) => b - a)
+  memo[key] = result && result.sort((a, b) => b - a)
+  return memo[key]
 }

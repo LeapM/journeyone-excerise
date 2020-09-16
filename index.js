@@ -38,7 +38,7 @@ rl.on('line', function (order) {
   console.log(
     `generating bundle breakdown for product code ${productCode}, order size ${orderSize}`
   )
-  const bundleBreakdown = generateBundleBreakdown(orderSize, bundles[productCode])
+  const bundleBreakdown = generateBundleBreakdown(orderSize, bundles[productCode], productCode)
   const prices = generateBundlePrices(bundles[productCode])
   if (bundleBreakdown !== null) {
     generateReport(productCode, orderSize, prices, bundleBreakdown)
