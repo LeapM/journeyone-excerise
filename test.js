@@ -1,4 +1,5 @@
 import { generateBundleBreakdown } from './bundlegenerator.js'
+import { generateReport } from './reportgenerator.js'
 
 const isBundleBreakdownEqual = (a1, a2) => {
   if (a1 === null && a2 === null) {
@@ -77,3 +78,5 @@ testCases.forEach(({ input, expected }, index) => {
     )
   }
 })
+
+// generateReport('HB24', 10, { 5: 11.11, 10: 22.22 }, [10, 5, 5, 10, 5])
