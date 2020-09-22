@@ -135,4 +135,20 @@ testCases.forEach(({ input, expectedWithMin, expectedWithMax }, index) => {
   }
 })
 
-// generateReport('HB24', 10, { 5: 11.11, 10: 22.22 }, [10, 5, 5, 10, 5])
+// performance testing
+const bundleInfo = [{ size: 2 }, { size: 10 }, { size: 20 }, { size: 30 }, { size: 50 }]
+const generateBundleWithMemo = makeBreakdownFunction(bundleInfo, comparatorForMinBundleNumber)
+const generateBundleWithoutMemo = makeBreakdownFunction(
+  bundleInfo,
+  comparatorForMinBundleNumber,
+  false
+)
+let startTime = Date.now()
+console.log('result', generateBundleWithMemo(100))
+console.log(`takes ${Date.now() - startTime} millisecond with memo`)
+// this take much longer, if we have size 1 in the bundleInfo as below, it will take forever to finish.
+// const bundleInfo = [{size:1}, { size: 2 }, { size: 10 }, { size: 20 }, { size: 30 }, { size: 50 }]
+// this the same bundle info, if the ordersize is 1000, it will take forever to finish
+startTime = Date.now()
+console.log('result', generateBundleWithoutMemo(100))
+console.log(`takes ${Date.now() - startTime} millisecond without memo`)

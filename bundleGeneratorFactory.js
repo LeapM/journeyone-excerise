@@ -40,7 +40,7 @@ const isValidBunldeBreakdown = (a) => a.length > 0
  * @return {Array}
  */
 function generateBundleBreakdown(orderSize, bundleInfos, comparator, memo) {
-  if (memo.hasOwnProperty(orderSize)) {
+  if (memo?.hasOwnProperty(orderSize)) {
     return memo[orderSize]
   }
 
@@ -67,6 +67,8 @@ function generateBundleBreakdown(orderSize, bundleInfos, comparator, memo) {
       result = bundleBreakdown
     }
   }
-  memo[orderSize] = result
-  return memo[orderSize]
+  if (memo) {
+    memo[orderSize] = result
+  }
+  return result
 }
