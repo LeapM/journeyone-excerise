@@ -1,4 +1,7 @@
-import { generateBundleBreakdown } from './bundlegenerator.js'
+import {
+  make as makeBreakdownFunction,
+  comparatorForMinimumBundleNumberStrategy,
+} from './bundleGeneratorFactory.js'
 import readline from 'readline'
 import { generateReport, generateBundlePrices } from './reportgenerator.js'
 const bundles = {
@@ -28,7 +31,6 @@ console.log(
 )
 
 console.log('Type end, press Enter to finish the program')
-
 rl.on('line', function (order) {
   if (order == 'end') {
     rl.close()
@@ -38,7 +40,12 @@ rl.on('line', function (order) {
   console.log(
     `generating bundle breakdown for product code ${productCode}, order size ${orderSize}`
   )
-  const bundleBreakdown = generateBundleBreakdown(orderSize, bundles[productCode], productCode)
+  const generateBundleBreakdown = makeBreakdownFunction(
+    bundles[productCode],
+    comparatorForMinimumBundleNumberStrategy
+  )
+  // force ordersize to be number
+  const bundleBreakdown = generateBundleBreakdown(orderSize - 0)
   const prices = generateBundlePrices(bundles[productCode])
   if (bundleBreakdown !== null) {
     generateReport(productCode, orderSize, prices, bundleBreakdown)
